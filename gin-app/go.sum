@@ -81,6 +81,10 @@ github.com/twitchyliquid64/golang-asm v0.15.1 h1:SU5vSMR7hnwNxj24w34ZyCi/FmDZTkS
 github.com/twitchyliquid64/golang-asm v0.15.1/go.mod h1:a1lVb/DtPvCB8fslRZhAngC2+aY1QWCk3Cedj/Gdt08=
 github.com/ugorji/go/codec v1.2.11 h1:BMaWp1Bb6fHwEtbplGBGJ498wD+LKlNSl25MjdZY4dU=
 github.com/ugorji/go/codec v1.2.11/go.mod h1:UNopzCgEMSXjBc6AOMqYvWC1ktqTAfzJZUZgYf6w6lg=
+github.com/uptrace/opentelemetry-go-extra/otelgorm v0.2.2 h1:ptBsJKjRXx46Qtw3h1CFSxLhbUfGENxXP5DAqAaAgZc=
+github.com/uptrace/opentelemetry-go-extra/otelgorm v0.2.2/go.mod h1:I31DilV6DKiHDUJBEP/Bou+UZeeNDz6LqZpJCTV9q/Y=
+github.com/uptrace/opentelemetry-go-extra/otelsql v0.2.2 h1:USRngIQppxeyb39XzkVHXwQesKK0+JSwnHE/1c7fgic=
+github.com/uptrace/opentelemetry-go-extra/otelsql v0.2.2/go.mod h1:1frv9RN1rlTq0jzCq+mVuEQisubZCQ4OU6S/8CaHzGY=
 go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin v0.43.0 h1:B8JzkALYp9VVR85AE7geXia+D4shAoUjaCEaBxn8NO8=
 go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin v0.43.0/go.mod h1:b4/TD3x8cVgX8ZCRioLqE0jAw1918mq95Q6tSYyc+g4=
 go.opentelemetry.io/contrib/propagators/b3 v1.18.0 h1:hhSlPVi9AQwOmbMmptPNLfRZOLgENdRM2kb7z9LFe1A=

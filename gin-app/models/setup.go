@@ -1,6 +1,7 @@
 package models
 
 import (
+	"github.com/uptrace/opentelemetry-go-extra/otelgorm"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	//"github.com/glebarez/sqlite"  // for windows
@@ -17,4 +18,7 @@ func InitDB() {
 
 	db.AutoMigrate(&Book{})
 	DB = db
+	if err := DB.Use(otelgorm.NewPlugin()); err != nil {
+		panic(err)
+	}
 }
