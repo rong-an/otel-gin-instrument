@@ -2,7 +2,10 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/rongan/otel-gin-instrument/gin-app/log"
 	"github.com/rongan/otel-gin-instrument/gin-app/models"
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/trace"
 	"net/http"
 )
 
@@ -20,9 +23,19 @@ type UpdateBookInput struct {
 // Find all books
 func FindBooks(c *gin.Context) {
 	var books []models.Book
+	span := trace.SpanFromContext(c.Request.Context())
+	span.SetAttributes(attribute.String("controller", "books"))
+	span.AddEvent("This is a sample event", trace.WithAttributes(attribute.Int("pid", 4328), attribute.String("sampleAttribute", "Test")))
 	models.DB.WithContext(c.Request.Context()).Find(&books)
+	c.Header("w3c_traceparent", "traceparent")
 
-	c.JSON(http.StatusOK, gin.H{"data": books})
+	log.C(c).Infow("get books", "trace_id", span.SpanContext().TraceID(), "span_id", span.SpanContext().SpanID())
+
+	c.JSON(http.StatusOK, gin.H{
+		"errno":  0,
+		"errmsg": "",
+		"data":   books,
+	})
 }
 
 // GET /books/:id
