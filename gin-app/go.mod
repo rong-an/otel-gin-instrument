@@ -13,6 +13,7 @@ require (
 	go.opentelemetry.io/otel/metric v1.17.0
 	go.opentelemetry.io/otel/sdk v1.17.0
 	go.opentelemetry.io/otel/sdk/metric v0.40.0
+	go.opentelemetry.io/otel/trace v1.17.0
 	go.uber.org/zap v1.25.0
 	google.golang.org/grpc v1.57.0
 	gorm.io/driver/sqlite v1.5.3
@@ -47,7 +48,6 @@ require (
 	github.com/ugorji/go/codec v1.2.11 // indirect
 	github.com/uptrace/opentelemetry-go-extra/otelsql v0.2.2 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlpmetric v0.40.0 // indirect
-	go.opentelemetry.io/otel/trace v1.17.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.0.0 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/arch v0.3.0 // indirect

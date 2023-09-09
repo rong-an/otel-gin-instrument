@@ -2,6 +2,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/rongan/otel-gin-instrument/gin-app/log"
+	"github.com/rongan/otel-gin-instrument/gin-app/metrics"
 	"github.com/rongan/otel-gin-instrument/gin-app/models"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
 	"go.opentelemetry.io/otel"
@@ -13,7 +15,6 @@ import (
 	"context"
 	"go.opentelemetry.io/otel/sdk/resource"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
-	"log"
 	"os"
 )
 
@@ -24,15 +25,28 @@ var (
 )
 
 func main() {
-	// init tracer
+	log.Init(&log.Options{
+		DisableCaller:     false,
+		DisableStacktrace: false,
+		Level:             "info",
+		Format:            "json",
+		OutputPaths:       []string{"stdout", "./gin.log"},
+	})
+
 	cleanup := initTracer()
 	defer cleanup(context.Background())
 
+	provider := metrics.InitMeter()
+	defer provider.Shutdown(context.Background())
+
+	meter := provider.Meter("GinApp")
+	metrics.GenerateMetrics(meter)
+
 	r := gin.Default()
+	r.Use(otelgin.Middleware(serviceName))
 	models.InitDB()
 
 	installRouters(r)
-	r.Use(otelgin.Middleware(serviceName))
 	r.Run(":8080")
 }
 
@@ -50,10 +64,10 @@ func initTracer() func(context.Context) error {
 			otlptracegrpc.WithEndpoint(collectorURL),
 		),
 	)
-
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalw("error", err)
 	}
+
 	resources, err := resource.New(
 		context.Background(),
 		resource.WithAttributes(
@@ -62,7 +76,7 @@ func initTracer() func(context.Context) error {
 		),
 	)
 	if err != nil {
-		log.Printf("Could not set resources: ", err)
+		log.Infow("could not set resources", err)
 	}
 
 	otel.SetTracerProvider(
