@@ -27,7 +27,6 @@ func FindBooks(c *gin.Context) {
 	span.SetAttributes(attribute.String("controller", "books"))
 	span.AddEvent("This is a sample event", trace.WithAttributes(attribute.Int("pid", 4328), attribute.String("sampleAttribute", "Test")))
 	models.DB.WithContext(c.Request.Context()).Find(&books)
-	c.Header("w3c_traceparent", "traceparent")
 
 	log.C(c).Infow("get books", "trace_id", span.SpanContext().TraceID(), "span_id", span.SpanContext().SpanID())
 

@@ -2,9 +2,9 @@ package models
 
 import (
 	"github.com/uptrace/opentelemetry-go-extra/otelgorm"
+	//"github.com/glebarez/sqlite" // for windows
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	//"github.com/glebarez/sqlite"  // for windows
 )
 
 var DB *gorm.DB

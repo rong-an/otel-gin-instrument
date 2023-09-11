@@ -11,11 +11,11 @@ import (
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"google.golang.org/grpc/credentials"
+	"os"
 
 	"context"
 	"go.opentelemetry.io/otel/sdk/resource"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
-	"os"
 )
 
 var (
@@ -78,6 +78,9 @@ func initTracer() func(context.Context) error {
 	if err != nil {
 		log.Infow("could not set resources", err)
 	}
+
+	//otel.SetTextMapPropagator(b3prop.New())
+	//fmt.Println(otel.GetTextMapPropagator().Fields())
 
 	otel.SetTracerProvider(
 		sdktrace.NewTracerProvider(
