@@ -2,9 +2,6 @@
 使用 vue-element-admin 实现一个简单的demo, 使用时需要修改 `ui/src/main.js` 中 RUM 相关参数 
 
 ```bash
-# clone the project
-git clone https://github.com/PanJiaChen/vue-element-admin.git
-
 # enter the project directory
 cd ui
 
